@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ReactDOM from 'react-dom';
-import RestController from'./Scripts/RestController';
+import My_order from'./Scripts/my_order';
+
 function App() {
   return (
     <div className="App">
@@ -11,7 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick = {()=>ReactDOM.render(<RestController/>, document.getElementById('root'))}>Home</button>
+        <button onClick = {()=>ReactDOM.render(<My_order/>, document.getElementById('root'))}>Home</button>
       </header>
     </div>
   );
