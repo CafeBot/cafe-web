@@ -13,6 +13,7 @@ constructor(props){
 componentDidMount() {
     const orderId = localStorage.getItem('orderId');
     fetch("http://localhost:8080/user/order/fetchStatus?orderId="+orderId+"", {
+
         method:"GET"
     }).then(response => {
 console.log(response)
@@ -38,3 +39,4 @@ render(){
 
 
 export default Status;
+

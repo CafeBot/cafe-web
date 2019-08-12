@@ -15,6 +15,7 @@ class OrderSummery extends React.Component {
      }
      localStorage.setItem('orderId', this.props.orderId);
 console.log(this.props.orderId)
+
   }
   renderTableData() {
     return (
@@ -40,6 +41,7 @@ console.log(this.props.orderId)
             <div>
             <center>
             <img src="https://www.incedoinc.com/templates/common/images/logo.svg" alt="" width="50%"></img>
+
             <table id='customers'>
                <tbody>
                <tr  id="customers"><th>Id</th><th>Snack</th><th>qty</th><th>price</th><th>total</th></tr>

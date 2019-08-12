@@ -10,6 +10,7 @@ class My_order extends React.Component{
         super(props);
         this.state = {EmpName:"",
                       user:1,
+
                       EmpId:0,
                       EmpPhone:0,
                     total:0,
@@ -217,6 +218,7 @@ class My_order extends React.Component{
       <line width ='100%'></line>
       <center>
         <br/><br/><br/>
+
         <table>
         <tr><td><label>Emp Id</label></td><td><input type="text" name="empId" onChange={this.SetId}></input></td>
         <td><label>Emp name</label></td><td><input type="text" name="empname" onChange={this.SetName}></input></td>
