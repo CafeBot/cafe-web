@@ -212,8 +212,10 @@ class My_order extends React.Component{
  render()    
 {
     return (
-      <div><center>
-                    <img src="https://www.incedoinc.com/templates/common/images/logo.svg" alt="" width="50%"></img>
+      <div><br/><br/>
+      <img src="https://www.incedoinc.com/templates/common/images/logo.svg" alt="" width="20%"></img>
+      <line width ='100%'></line>
+      <center>
         <br/><br/><br/>
         <table>
         <tr><td><label>Emp Id</label></td><td><input type="text" name="empId" onChange={this.SetId}></input></td>
