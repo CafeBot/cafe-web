@@ -12,11 +12,10 @@ class OrderSummery extends React.Component {
         EmployeeId : this.props.EmployeeId,
         EmployeeContact : this.props.EmployeeContact,
         OrderTotal : this.props.OrderTotal,
-
      }
-     
+     localStorage.setItem('orderId', this.props.orderId);
 console.log(this.props.orderId)
-     
+
   }
   renderTableData() {
     return (
@@ -40,8 +39,9 @@ console.log(this.props.orderId)
         const Link="http://localhost:8080/user/order/payDirectPaytm?emp_id="+this.state.EmployeeId+"&cart_id="+this.state.orderId+"&total="+this.state.OrderTotal+"&ph_no="+this.state.EmployeeContact+"";
         return (
             <div>
-                        <Status orderId = {this.state.orderId}/>
-<center>
+            <center>
+            <img src="https://www.incedoinc.com/templates/common/images/logo.svg" alt="" width="50%"></img>
+
             <table id='customers'>
                <tbody>
                <tr  id="customers"><th>Id</th><th>Snack</th><th>qty</th><th>price</th><th>total</th></tr>

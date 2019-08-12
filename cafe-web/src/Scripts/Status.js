@@ -4,14 +4,16 @@ import OrderSummery from './OrderSummery'
 import '../Styles/orderSummery.css';
 import App from '../App';
 
-class Fail extends React.Component{
+class Status extends React.Component{
 constructor(props){
     super(props);
     this.state = {status:"",
-                orderId:this.props.orderId}
+                }
 }
 componentDidMount() {
-    fetch("http://localhost:8080/user/order/fetchStatus?orderId="+this.state.orderId+"", {
+    const orderId = localStorage.getItem('orderId');
+    fetch("http://localhost:8080/user/order/fetchStatus?orderId="+orderId+"", {
+
         method:"GET"
     }).then(response => {
 console.log(response)
@@ -36,4 +38,5 @@ render(){
 }
 
 
-export default Fail;
+export default Status;
+
