@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import OrderSummery from './OrderSummery';
 import '../Styles/orderSummery.css';
 
-
 class My_order extends React.Component{
     constructor(props) {
         super(props);
@@ -36,7 +35,7 @@ class My_order extends React.Component{
 
 
       }
-      
+ 
       onAddItem() {
         //this.setState(state => {
        // const list = state.list.concat(state.value);})
@@ -62,7 +61,7 @@ class My_order extends React.Component{
           postTemp[index].qty = value
           
           postTemp[index].total=postTemp[index].qty*postTemp[index].price
-        this.CalculateTotal()
+          this.CalculateTotal()
             return{
               ...state,
               posts:postTemp
@@ -87,7 +86,8 @@ class My_order extends React.Component{
           postTemp[index].price = price
           postTemp[index].name = name
           postTemp[index].snack_id = value
-          
+          postTemp[index].total=postTemp[index].qty*postTemp[index].price
+          this.CalculateTotal()
             return{
               ...state,
               posts:postTemp
@@ -172,11 +172,10 @@ class My_order extends React.Component{
           this.setState({EmpPhone:e.target.value})
         }
 
-        SaveOrderDetails() {
+        SaveOrderDetails(event) {
+        
           fetch('http://localhost:8080/user/order/save', {
-                         //https://jsonplaceholder.typicode.com/posts
             method: 'POST',
-            //mode:'no-cors',
             headers: {
               
               "Content-type": "application/json; charset=UTF-8"
@@ -190,7 +189,7 @@ class My_order extends React.Component{
           Snack: this.state.data,
           datetime: this.datee(),
           total: this.state.total,
-          tnx_id: "627832862786483644535",
+          tnx_id: null,
           payment_status: "pending"
             }),
           }).then(response => {
@@ -203,7 +202,7 @@ class My_order extends React.Component{
                 this.newpage();
               });
             });
-                      
+            event.preventDefault();           
         }
         newpage = ()=>ReactDOM.render(<OrderSummery orderSummaryData ={this.state.data} 
           orderId = {this.state.user} OrderTotal={this.state.total}
@@ -217,16 +216,16 @@ class My_order extends React.Component{
       <img src="https://www.incedoinc.com/templates/common/images/logo.svg" alt="" width="20%"></img>
       <line width ='100%'></line>
       <center>
+        <form onSubmit={this.SaveOrderDetails}>
         <br/><br/><br/>
 
         <table>
-        <tr><td><label>Emp Id</label></td><td><input type="text" name="empId" onChange={this.SetId}></input></td>
-        <td><label>Emp name</label></td><td><input type="text" name="empname" onChange={this.SetName}></input></td>
-        <td><label>contact no.</label></td><td><input type="text" name="contactNo." onChange={this.SetPhone}></input></td></tr>
+          <tr><td><label>Emp Id</label></td><td><input type="text" name="empId" onChange={this.SetId}  maxLength='6' minLength='6' required></input></td>
+          <td><label>Emp name</label></td><td><input type="text" name="empname" onChange={this.SetName} required></input></td>
+          <td><label>contact no.</label></td><td><input id="Contact" type="text"   pattern="[0-9]*"   name="contactNo." onChange={this.SetPhone}  maxLength='10' minLength='10'  required/></td></tr>
         </table>
        <table id ="customers">
          <tr>
-                    <th> ADD</th>
                     <th>Menu </th>
                     <th>Quantity</th>
                     <th>Price</th>
@@ -235,10 +234,9 @@ class My_order extends React.Component{
             </tr>
            { this.state.data.map((post,index)=> 
           <tr>
-                 <td>   <button class=" form-control col-sm-1 offset-sm-1 text-center" type="button"  onClick={this.handleAddShareholder}    > +</button> </td>
 
                  <td>   <select 
-               onChange={(e)=>this.onChangePrice(e,index)}>
+               onChange={(e)=>this.onChangePrice(e,index)} required>
                         <option value="" disabled selected>Select your option</option>
                         {
                             posts.map(post => (
@@ -248,7 +246,7 @@ class My_order extends React.Component{
                         }
                             </select>  </td>
 
-                            <td>    <input type="number"  class="form-control col-sm-2 text-center" min="0" name='qty' onChange={(e)=>this.onChangeQty(e,index)} /> </td>
+                            <td>    <input type="number"  class="form-control col-sm-2 text-center" min="0" name='qty' onChange={(e)=>this.onChangeQty(e,index)} required/> </td>
                             <td>    <input   class="form-control col-sm-2 text-center" value={post.price} readonly/>  </td>
                             <td>    <input  class="form-control col-sm-2 text-center" value={post.total} readonly/>  </td>
                             <td>    <button type="button" class="form-control col-sm-1 text-center" onClick={() => this.removePeople(index)}> -</button>  </td>
@@ -257,8 +255,10 @@ class My_order extends React.Component{
         </tr>)}
 
            </table>
+            <button type="button"onClick={this.handleAddShareholder}align="Right"> Add Item</button>
                         <div  > Total: {this.state.total} </div>
-            <button id="customer_button" onClick={this.SaveOrderDetails}>Save data</button>
+                        <button id="customer_button" type='submit' >Save data</button>
+              </form>
             </center>
            </div>     
             );
