@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ReactDOM from 'react-dom';
+import My_order from'./Scripts/my_order';
 
 function App() {
   return (
@@ -10,14 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick = {()=>ReactDOM.render(<My_order/>, document.getElementById('root'))}>Home</button>
       </header>
     </div>
   );
